@@ -18,33 +18,22 @@
 
 
     <script type="text/javascript" defer="defer">
-        setTimeout(() => {
-            let products = [
-                {
-                    'title': 'Some title1',
-                    'description': 'Description1'
-                },
-                {
-                    'title': 'Some title2',
-                    'description': 'Description2'
-                },
-                {
-                    'title': 'Some title2',
-                    'description': 'Description2'
-                }
-            ]
-
-            loader.style.display = 'none'
-
-            products.map(item => {
+            fetch('./api.php', {
+                method: 'GET'
+            })
+            .then(arr => arr.text())
+            .then(text => {
+                loader.style.display = 'none'
+                
+                let arr = JSON.parse(text)
+                arr.map(item => {
                 content.innerHTML += 
                     `<div class="item">
                         <p>${item.title}</p>
                         <p>${item.description}</p>
                     </div>`
+                })
             })
-            
-        }, 2000)
     </script>
 </body>
 </html>
